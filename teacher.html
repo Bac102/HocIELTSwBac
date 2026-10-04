@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Theo dõi lớp</title>
+<style>:root{--bg:#fff;--fg:#1c1c28;--bd:#e5e7eb;--acc:#d9261c;--mut:#6b7280}@media(prefers-color-scheme:dark){:root{--bg:#15161c;--fg:#e8e8ee;--bd:#2d2f3a;--mut:#9aa0ac}}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px system-ui,sans-serif}
+header{display:flex;gap:10px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.logo{color:var(--acc);font-weight:800}input,select,button{font:inherit;padding:7px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg)}button{cursor:pointer}
+.w{overflow:auto;max-height:calc(100vh - 62px)}table{border-collapse:collapse;min-width:100%}
+th,td{border:1px solid var(--bd);padding:6px 8px;white-space:nowrap;text-align:center}th{position:sticky;top:0;background:var(--bg);z-index:2}
+td:first-child,th:first-child{position:sticky;left:0;background:var(--bg);text-align:left;font-weight:600;z-index:1}
+.fl{outline:2px solid var(--acc);outline-offset:-2px}.chg{animation:f 2s}@keyframes f{from{background:#fff176;color:#000}}.ok{color:#16a34a;font-weight:700}.off{color:var(--mut)}</style></head><body>
+<header><span class="logo">Theo dõi lớp</span><span id="ctl" style="display:none;gap:8px"><select id="fc"></select><select id="ft"></select></span><span id="msg" class="off"></span><span style="flex:1"></span><span id="lg"><input id="pw" type="password" placeholder="Mật khẩu giáo viên" onkeydown="if(event.key==='Enter')login()"> <button onclick="login()">Vào</button></span></header>
+<div class="w"><table id="t"></table></div>
+<script>
+const U="https://kbagsmnlqphccfiljytk.supabase.co",K="sb_publishable_iu-5SuzWzybaLDFAsx6RtQ_3IixmRjJ";
+let pw=sessionStorage.getItem("tp")||"",rows=[],prev={},timer,ok=false;
+const $=s=>document.querySelector(s),esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function load(){try{const r=await fetch(U+"/rest/v1/rpc/teacher_list",{method:"POST",headers:{apikey:K,"Content-Type":"application/json"},body:JSON.stringify({p_pass:pw})});if(!r.ok)throw 0;rows=await r.json();ok=true;sessionStorage.setItem("tp",pw);$("#lg").style.display="none";$("#ctl").style.display="flex";$("#msg").textContent="Cập nhật mỗi 3 giây · "+rows.length+" bài";draw()}catch(e){$("#msg").textContent=ok?"Mất kết nối, đang thử lại…":"Không vào được. Kiểm tra mật khẩu và đã chạy file SQL chưa.";if(!ok)$("#lg").style.display=""}}
+function login(){pw=$("#pw").value;clearInterval(timer);load();timer=setInterval(load,3000)}
+if(pw){load();timer=setInterval(load,3000)}
+function opt(s,l,v){v=v.filter(Boolean);const sig=v.join("|");if(s.dataset.sig===sig)return;const c=s.value;s.dataset.sig=sig;s.innerHTML=`<option value="">${l}</option>`+v.map(x=>`<option ${x===c?"selected":""}>${esc(x)}</option>`).join("")}
+function fmt(v){return v===undefined?"":typeof v==="number"?String.fromCharCode(65+v):v==="True"?"T":v==="False"?"F":v==="Not given"?"NG":v}
+function draw(){const fc=$("#fc"),ft=$("#ft");opt(fc,"Tất cả lớp",[...new Set(rows.map(r=>r.class_code))]);opt(ft,"Tất cả đề",[...new Set(rows.map(r=>r.test))]);
+const R=rows.filter(r=>(!fc.value||r.class_code===fc.value)&&(!ft.value||r.test===ft.value)),N=Math.max(0,...R.map(r=>r.total)),now=Date.now();
+let h="<tr><th>Học sinh</th><th>Lớp</th><th>Trạng thái</th><th>Còn lại</th><th>Đã làm</th><th>Đang ở</th>";for(let n=1;n<=N;n++)h+=`<th>${n}</th>`;h+="</tr>";
+R.forEach(r=>{const d=r.data||{},ans=d.ans||{},fl=d.flags||[],age=(now-new Date(r.updated_at))/1000,done=r.status==="done",left=Math.max(0,Math.round(((d.deadline||0)-now)/1000));
+const st=done?'<span class="ok">Đã nộp</span>':age>30?'<span class="off">Mất kết nối</span>':"Đang làm";
+h+=`<tr><td>${esc(r.student)}</td><td>${esc(r.class_code)}</td><td>${st}</td><td>${done?"–":Math.floor(left/60)+":"+String(left%60).padStart(2,"0")}</td><td>${r.answered}/${r.total}</td><td>Passage ${(d.cur||0)+1}</td>`;
+for(let n=1;n<=N;n++){const v=fmt(ans[n]),k=r.id+"_"+n,c=prev[k]!==undefined&&prev[k]!==v?"chg":"";prev[k]=v;h+=`<td class="${c} ${fl.includes(n)?"fl":""}">${esc(v)}</td>`}h+="</tr>"});
+$("#t").innerHTML=h}
+</script></body></html>

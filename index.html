@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IELTS Reading Online</title>
+<style>
+:root{--bg:#fff;--fg:#1c1c28;--mut:#6b7280;--bd:#e5e7eb;--card:#fff;--acc:#d9261c;--accb:#fde8e6;--hl:#fff176;--hlfg:#000;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15161c;--fg:#e8e8ee;--mut:#9aa0ac;--bd:#2d2f3a;--card:#1d1f27;--accb:#3a1c1a;--hl:#b59f00;--hlfg:#fff}}
+:root[data-theme="dark"]{--bg:#15161c;--fg:#e8e8ee;--mut:#9aa0ac;--bd:#2d2f3a;--card:#1d1f27;--accb:#3a1c1a;--hl:#b59f00;--hlfg:#fff}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+button{font:inherit;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;cursor:pointer}
+button:hover{border-color:var(--acc)}button.on{background:var(--accb);border-color:var(--acc);color:var(--acc)}
+.pri{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+header{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+header .sp{flex:1}.logo{color:var(--acc);font-weight:800;font-size:18px}
+#timer{font-weight:700;font-variant-numeric:tabular-nums}#timer.low{color:var(--acc)}
+main{flex:1;display:flex;min-height:0}
+#pass,#qs{overflow-y:auto;padding:20px 28px}
+#pass{flex:1.05;border-right:1px solid var(--bd);line-height:1.7}
+#qs{flex:1}
+#pass h2{margin:0 0 14px}#pass p{margin:0 0 14px}
+.hl{background:var(--hl);color:var(--hlfg);cursor:pointer;border-radius:2px}
+.hlmode #pass{cursor:text}
+.grp{margin-bottom:20px}.badge{display:inline-block;background:var(--accb);color:var(--acc);font-weight:700;border-radius:20px;padding:6px 14px;margin-right:8px}
+.q{border:1px solid var(--bd);background:var(--card);border-radius:16px;padding:16px 20px;margin:14px 0;position:relative}
+.q .t{font-weight:600;margin-bottom:10px;padding-right:34px}.q .t b{color:var(--acc);margin-right:4px}
+.q label{display:flex;align-items:center;gap:10px;padding:7px 0;cursor:pointer}
+.q input[type=text]{width:100%;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
+.flag{position:absolute;right:12px;top:12px;padding:3px 7px;font-size:14px}
+.q.fl{border-color:var(--acc)}
+footer{border-top:1px solid var(--bd);padding:8px 16px;display:flex;align-items:center;gap:14px;overflow-x:auto}
+.nav{display:flex;gap:5px;align-items:center;flex:1;flex-wrap:nowrap}
+.nl{font-weight:700;color:var(--acc);margin:0 4px 0 10px;white-space:nowrap;cursor:pointer}
+.n{min-width:34px;height:34px;border-radius:50%;padding:0;font-weight:600}
+.n.done{background:var(--fg);color:var(--bg)}.n.fl{outline:2px solid var(--acc)}
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px;overflow-y:auto;flex:1;width:100%}
+textarea{width:100%;min-height:150px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--fg);font:12px/1.5 ui-monospace,monospace}
+.card{border:1px solid var(--bd);background:var(--card);border-radius:16px;padding:18px;margin:14px 0}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.ok{color:#16a34a;font-weight:700}.bad{color:var(--acc);font-weight:700}
+.muted{color:var(--mut);font-size:13px}
+@media(max-width:760px){main{flex-direction:column}#pass{border-right:0;border-bottom:1px solid var(--bd);max-height:45%}#pass,#qs{padding:14px}}
+#pass,#qs{min-width:0}
+#gut{flex:none;width:10px;cursor:col-resize;background:var(--bd);touch-action:none;position:relative;transition:background .15s}
+#gut::after{content:"";position:absolute;left:50%;top:50%;width:4px;height:36px;transform:translate(-50%,-50%);border-radius:2px;background:var(--mut);opacity:.6}
+#gut:hover,body.drag #gut{background:var(--acc)}#gut:hover::after,body.drag #gut::after{background:#fff;opacity:.9}
+body.drag{user-select:none;cursor:col-resize}
+@media(max-width:760px){#gut{width:auto;height:12px;cursor:row-resize}#gut::after{width:36px;height:4px}body.drag{cursor:row-resize}}
+footer>button{flex:none;white-space:nowrap}
+.note{border-bottom:2px dashed var(--acc);background:rgba(217,38,28,.08);cursor:pointer}
+.note[data-end]::after{content:"✎";font-size:.75em;color:var(--acc);margin-left:2px}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.mb{background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:16px;padding:20px;max-width:520px;width:100%;max-height:85%;overflow:auto}
+.mb textarea{min-height:110px;font:inherit}
+.sg{display:flex;flex-wrap:wrap;gap:6px}.n.empty{border-color:var(--acc)}.n sup{font-size:9px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 70px);background:var(--fg);color:var(--bg);padding:12px 20px;border-radius:12px;font-weight:600;z-index:60;box-shadow:0 6px 24px rgba(0,0,0,.25);max-width:90%}
+</style></head><body>
+<div id="app" style="display:flex;flex-direction:column;flex:1;min-height:0"></div>
+<script>
+let lib=[],dbh=null,canEdit=(location.hash==="#giaovien"),ready=false,atHome=true,T,ans,flags,cur,hlOn,hl,notes={},w10,w5,deadline,tick,done,fs=16;
+try{const s=JSON.parse(localStorage.getItem("ielts_lib")||"[]");lib=s}catch(e){}
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function save(){try{localStorage.setItem("ielts_lib",JSON.stringify(lib.filter(t=>!t._srv)))}catch(e){}}
+function valid(t){if(!t||!Array.isArray(t.passages)||!t.passages.length)throw "Thiếu 'passages'";t.passages.forEach(p=>{if(!p.text||!Array.isArray(p.groups))throw "Passage thiếu text/groups"});return t}
+/* ---------- HOME ---------- */
+function home(){clearInterval(tick);clearInterval(beat);closeM();atHome=true;$("#app").innerHTML=`<header><span class="logo">IELTS Reading</span><span class="sp"></span><button onclick="theme()">🌓</button></header>
+<div class="wrap"><h2>Chọn đề thi</h2><div id="list"></div>
+${ready&&canEdit?`<div class="card"><b>Nhập đề mới (dành cho giáo viên)</b><p class="muted">Dán JSON đề thi hoặc tải file .json. Đề nhập ở đây chỉ lưu trên máy này để bạn thử. Muốn học sinh thấy đề, hãy bỏ file JSON vào thư mục tests/ và thêm tên file vào tests/index.json (xem README).</p>
+<textarea id="imp" placeholder='{"title":"...","time":60,"passages":[{"title":"...","text":"đoạn 1\\n\\nđoạn 2","groups":[{"type":"tfng|mcq|fill","instruction":"...","items":[{"q":"...","a":"True","o":["A","B"]}]}]}]}'></textarea>
+<div class="row" style="margin-top:10px"><input type="file" id="file" accept=".json,.txt"><button class="pri" onclick="doImport()">Nhập đề</button></div><div id="msg" class="muted"></div></div>`:""}</div>`;drawList();const fi=$("#file");if(fi)fi.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader;r.onload=()=>{$("#imp").value=r.result};r.readAsText(f)}}
+function drawList(){drawList0();const L=$("#list"),S=getSess();if(L&&ready&&S&&S.done&&lib.some(t=>(t.title||"")===S.k))L.insertAdjacentHTML("afterbegin",`<div class="card row"><div><b>Bạn đã nộp bài: ${esc(S.k)}</b><div class="muted">Bạn có thể xem lại bài làm của mình</div></div><button onclick="resume()">Xem lại bài</button></div>`)}
+function drawList0(){const L=$("#list");if(!L)return;L.innerHTML=!lib.length?`<p class="muted">${!ready?"Đang tải đề…":canEdit?"Chưa có đề nào. Hãy nhập đề ở bên dưới.":"Chưa có đề nào. Hãy liên hệ giáo viên."}</p>`:lib.map((t,i)=>{const n=t.passages.reduce((a,p)=>a+p.groups.reduce((b,g)=>b+g.items.length,0),0);return`<div class="card row"><div><b>${esc(t.title||"Đề "+i)}</b><div class="muted">${t.passages.length} passage · ${n} câu · ${t.time||60} phút</div></div><div>${ready&&canEdit?`<button onclick="copyT(${i})">Sao chép</button> <button onclick="del(${i})">Xóa</button> `:""}<button class="pri" onclick="ask(${i})">Bắt đầu</button></div></div>`}).join("")}
+async function doImport(){try{const t=valid(JSON.parse($("#imp").value));t.title=t.title||"Đề mới";
+if(dbh){await dbh.collection("tests").add({title:t.title,ts:Date.now(),json:JSON.stringify(t)});$("#imp").value="";$("#msg").textContent="Đã lưu đề. Học sinh mở link sẽ thấy đề này."}
+else{lib.push(t);save();home()}}catch(e){$("#msg").textContent="Lỗi: "+(e&&e.message||e)}}
+function del(i){if(lib[i]._srv){alert("Đề này nằm trong thư mục tests/ của website. Hãy xóa file và sửa tests/index.json.");return}if(!confirm("Xóa đề này?"))return;if(dbh){dbh.doc("tests/"+lib[i]._id).delete().catch(()=>alert("Không có quyền xóa đề."))}else{lib.splice(i,1);save();home()}}
+function copyT(i){const {_id,_ts,_srv,...t}=lib[i];const s=JSON.stringify(t,null,1);navigator.clipboard.writeText(s).then(()=>alert("Đã sao chép JSON của đề."),()=>{$("#imp").value=s})}
+function theme(){const r=document.documentElement;r.dataset.theme=(r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme:dark)").matches))?"light":"dark"}
+/* ---------- EXAM ---------- */
+function start(i,S){atHome=false;T=lib[i];ans={};flags=new Set;cur=0;hl={};notes={};hlOn=false;done=false;deadline=Date.now()+(T.time||60)*60000;w10=w5=false;
+if(S){ans=S.ans||{};flags=new Set(S.flags||[]);cur=S.cur||0;hl=S.hl||{};notes=S.notes||{};deadline=S.deadline;done=!!S.done;fs=S.fs||fs;const r=(deadline-Date.now())/1000;w10=r<=600;w5=r<=300}
+let n=0;T.passages.forEach(p=>{p.start=n+1;p.groups.forEach(g=>g.items.forEach(it=>{it.n=++n}));p.end=n});T.total=n;
+att=S&&S.att?S.att:{id:uid(),token:uid(),name:(who&&who.name)||"Ẩn danh",cls:(who&&who.cls)||""};if(S&&done){finished();return}
+$("#app").innerHTML=shell(false);initGut();go(cur);saveSess();tickT();tick=setInterval(tickT,500);clearInterval(beat);beat=setInterval(sync,8000)}
+/* ---------- GỬI TIẾN ĐỘ VỀ CHO GIÁO VIÊN (Supabase) ---------- */
+const SB={u:"https://kbagsmnlqphccfiljytk.supabase.co",k:"sb_publishable_iu-5SuzWzybaLDFAsx6RtQ_3IixmRjJ"};
+let att=null,syncT=null,beat=null,who=null;try{who=JSON.parse(localStorage.getItem("ielts_who")||"null")}catch(e){}
+const uid=()=>crypto.randomUUID?crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c=="x"?r:r&3|8).toString(16)});
+function sync(){if(!T||!att)return;clearTimeout(syncT);fetch(SB.u+"/rest/v1/rpc/save_attempt",{method:"POST",headers:{apikey:SB.k,"Content-Type":"application/json"},keepalive:true,body:JSON.stringify({p_id:att.id,p_token:att.token,p_student:att.name,p_class:att.cls||"",p_test:T.title||"",p_data:{ans,flags:[...flags],cur,notes,deadline,fs},p_answered:Object.keys(ans).length,p_total:T.total,p_status:done?"done":"doing"})}).catch(()=>{})}
+function syncSoon(){clearTimeout(syncT);syncT=setTimeout(sync,1200)}
+function ask(i){const st='style="width:100%;padding:10px;margin-bottom:8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit"';
+modal(`<h3 style="margin:0 0 6px">Thông tin học sinh</h3><p class="muted">Giáo viên sẽ thấy tiến độ làm bài của bạn.</p><input id="wn" ${st} placeholder="Họ và tên" value="${esc(who&&who.name||"")}"><input id="wc" ${st} placeholder="Mã lớp (nếu có)" value="${esc(who&&who.cls||"")}"><div class="row" style="margin-top:8px"><button onclick="closeM()">Hủy</button><button class="pri" onclick="begin(${i})">Bắt đầu</button></div>`)}
+function begin(i){const n=$("#wn").value.trim();if(!n){toast("Vui lòng nhập họ tên",2500);return}who={name:n,cls:$("#wc").value.trim()};try{localStorage.setItem("ielts_who",JSON.stringify(who))}catch(e){}closeM();start(i)}
+/* ---------- LƯU & KHÔI PHỤC BÀI ---------- */
+function saveSess(){if(!T||atHome)return;try{localStorage.setItem("ielts_sess",JSON.stringify({k:T.title||"",att,ans,flags:[...flags],cur,hl,notes,deadline,done,fs}))}catch(e){}syncSoon()}
+function getSess(){try{return JSON.parse(localStorage.getItem("ielts_sess")||"null")}catch(e){return null}}
+function clearSess(){try{localStorage.removeItem("ielts_sess")}catch(e){}}
+function resume(){const S=getSess();if(!S)return false;const i=lib.findIndex(t=>(t.title||"")===S.k);if(i<0)return false;start(i,S);return true}
+/* ---------- TOAST & MODAL ---------- */
+function toast(m,ms){const o=$("#toast");o&&o.remove();const d=document.createElement("div");d.id="toast";d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),ms||5000)}
+function closeM(){const m=$("#modal");m&&m.remove()}
+function modal(h){closeM();const m=document.createElement("div");m.id="modal";m.innerHTML='<div class="mb">'+h+'</div>';m.onclick=e=>{if(e.target===m)closeM()};document.body.appendChild(m)}
+/* ---------- TỔNG QUAN ---------- */
+function summary(){if(!T)return;const tot=T.total,an=Object.keys(ans).length;
+const rows=T.passages.map((p,i)=>{let h=`<div class="muted" style="margin:12px 0 6px">Passage ${i+1}</div><div class="sg">`;for(let n=p.start;n<=p.end;n++){const f=flags.has(n);h+=`<button class="n ${ans[n]!==undefined?"done":"empty"} ${f?"fl":""}" onclick="closeM();jump(${i},${n})">${n}${f?"<sup>🚩</sup>":""}</button>`}return h+"</div>"}).join("");
+modal(`<h3 style="margin:0 0 4px">Tổng quan câu hỏi</h3><div class="muted">Đã làm ${an}/${tot} · Chưa làm ${tot-an} · Gắn cờ ${flags.size}</div><div class="muted">Ô đen: đã làm. Ô viền đỏ: chưa làm. Bấm vào số để tới câu đó.</div>${rows}${!done&&tot-an?`<p class="bad">Bạn còn ${tot-an} câu chưa làm.</p>`:""}<div class="row" style="margin-top:16px"><button onclick="closeM()">${done?"Đóng":"Quay lại làm bài"}</button>${done?"":`<button class="pri" onclick="closeM();submit(true)">Nộp bài</button>`}</div>`)}
+function shell(rv){return rv?`<header><button onclick="finished()">← Quay lại</button><span class="logo">Xem lại bài</span><span class="sp"></span><button onclick="font(1)">A+</button><button onclick="font(-1)">A−</button><button onclick="theme()">🌓</button></header><main><div id="pass"></div><div id="gut" title="Kéo để đổi kích thước. Nhấp đúp để đặt lại"></div><div id="qs"></div></main><footer><button onclick="summary()">▦ Tổng quan</button><div class="nav" id="nav"></div><button class="pri" onclick="go(cur+1)">Tiếp →</button></footer>`:`<header><button onclick="if(confirm('Thoát bài thi? Bài đang làm sẽ bị xóa.')){clearSess();home()}">✕</button><span class="logo">IELTS</span>
+<button id="bh" onclick="togHL()">🖍 Highlight</button><button onclick="clearHL()">🧽 Xóa highlight</button><button onmousedown="event.preventDefault()" onclick="addNote()">📝 Ghi chú</button>
+<span class="sp"></span><b>Làm bài</b> ⏱ <span id="timer"></span><span class="sp"></span>
+<button onclick="font(1)">A+</button><button onclick="font(-1)">A−</button><button onclick="theme()">🌓</button><button class="pri" onclick="summary()">Nộp bài</button></header>
+<main><div id="pass"></div><div id="gut" title="Kéo để đổi kích thước. Nhấp đúp để đặt lại"></div><div id="qs"></div></main><footer><button onclick="summary()">▦ Tổng quan</button><div class="nav" id="nav"></div><button class="pri" onclick="go(cur+1)">Tiếp →</button></footer>`}
+function tickT(){if(done)return;let s=Math.max(0,Math.round((deadline-Date.now())/1000));const e=$("#timer");e.textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");e.className=s<300?"low":"";if(!s){submit(true);return}if(!w5&&s<=300){w5=w10=true;toast("⏰ Chỉ còn 5 phút!",8000)}else if(!w10&&s<=600){w10=true;toast("⏰ Còn 10 phút",8000)}}
+function go(i){if(i>=T.passages.length||i<0){if(i>=T.passages.length&&!done)summary();return}
+const ps=$("#pass");cur=i;const p=T.passages[i];
+ps.innerHTML=`<h2>${esc(p.title||"Passage "+(i+1))}</h2>`+p.text.split(/\n\s*\n|\\n\\n/).map(x=>`<p>${esc(x.trim())}</p>`).join("");ps.style.fontSize=fs+"px";$("#qs").style.fontSize=fs+"px";
+$("#qs").innerHTML=`<div style="margin-bottom:8px"><span class="badge">Questions ${p.start}–${p.end}</span></div>`+p.groups.map(g=>`<div class="grp"><b>${esc(g.instruction||"")}</b>`+g.items.map(it=>qHTML(g,it)).join("")+`</div>`).join("");
+applyHL(ps,"p"+i);applyHL($("#qs"),"q"+i);$("#qs").scrollTop=0;ps.scrollTop=0;nav();saveSess()}
+function qHTML(g,it){const n=it.n,v=ans[n];let b="";
+if(g.type==="fill")b=`<input type="text" value="${esc(v||"")}" oninput="setA(${n},this.value)" ${done?"disabled":""} autocomplete="off">`;
+else{const o=g.type==="tfng"?["True","False","Not given"]:g.o||it.o||[];b=o.map((x,k)=>{const val=g.type==="tfng"?x:k;return`<label><input type="radio" name="q${n}" ${v===val?"checked":""} ${done?"disabled":""} onchange="setA(${n},${JSON.stringify(val).replace(/"/g,"&quot;")})"><span>${g.type==="mcq"?String.fromCharCode(65+k)+". ":""}${esc(x)}</span></label>`}).join("")}
+return`<div class="q ${flags.has(n)?"fl":""}" id="q${n}"><button class="flag" ${done?"disabled":""} onclick="flag(${n})">🚩</button><div class="t"><b>${n}.</b> ${esc(it.q)}</div>${b}</div>`}
+function setA(n,v){if(v===""||v==null)delete ans[n];else ans[n]=v;nav();saveSess()}
+function flag(n){flags.has(n)?flags.delete(n):flags.add(n);$("#q"+n).classList.toggle("fl");nav();saveSess()}
+function nav(){$("#nav").innerHTML=T.passages.map((p,i)=>{let h=`<span class="nl" onclick="go(${i})" style="${i===cur?"":"color:var(--mut)"}">Passage ${i+1}</span>`;for(let n=p.start;n<=p.end;n++)h+=`<button class="n ${ans[n]!==undefined?"done":""} ${flags.has(n)?"fl":""}" onclick="jump(${i},${n})">${n}</button>`;return h}).join("")}
+function jump(i,n){if(i!==cur)go(i);const e=$("#q"+n);e&&e.scrollIntoView({behavior:"smooth",block:"center"})}
+function font(d){fs=Math.min(26,Math.max(12,fs+d));$("#pass").style.fontSize=fs+"px";$("#qs").style.fontSize=fs+"px"}
+/* ---------- RESIZE ---------- */
+function initGut(){const g=$("#gut"),m=$("main"),p=$("#pass");if(!g)return;let v=null;
+const apply=x=>{p.style.maxHeight=x==null?"":"none";p.style.flex=x==null?"":"0 0 "+x+"%"};
+try{v=parseFloat(localStorage.getItem("ielts_split"))||null}catch(e){}apply(v);
+g.onpointerdown=e=>{e.preventDefault();g.setPointerCapture(e.pointerId);document.body.classList.add("drag");
+g.onpointermove=ev=>{const r=m.getBoundingClientRect(),col=getComputedStyle(m).flexDirection==="column",x=col?(ev.clientY-r.top)/r.height:(ev.clientX-r.left)/r.width;v=Math.min(75,Math.max(25,x*100));apply(v)};
+g.onpointerup=g.onpointercancel=()=>{g.onpointermove=g.onpointerup=g.onpointercancel=null;document.body.classList.remove("drag");try{localStorage.setItem("ielts_split",v)}catch(e){}}};
+g.ondblclick=()=>{v=null;apply(null);try{localStorage.removeItem("ielts_split")}catch(e){}}}
+/* ---------- HIGHLIGHT ---------- */
+function togHL(){hlOn=!hlOn;$("#bh").classList.toggle("on",hlOn);document.body.classList.toggle("hlmode",hlOn)}
+function clearHL(){delete hl["p"+cur];delete hl["q"+cur];go(cur)}
+/* Highlight lưu theo vị trí ký tự nên áp dụng được cho cả bài đọc lẫn câu hỏi */
+function tnodes(c){const w=document.createTreeWalker(c,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentNode.closest("button,textarea")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}),a=[];let p=0;
+while(w.nextNode()){const n=w.currentNode;a.push({n,s:p});p+=n.nodeValue.length}return a}
+function offOf(c,node,off){let tot=0;for(const t of tnodes(c)){const r=document.createRange();r.selectNodeContents(t.n);const k=r.comparePoint(node,off);if(k===1){tot=t.s+t.n.nodeValue.length;continue}return k===0?t.s+(node===t.n?off:0):t.s}return tot}
+function unwrapHL(c){c.querySelectorAll(".hl,.note").forEach(h=>h.replaceWith(...h.childNodes));c.normalize()}
+function applyRanges(c,R,cls,wi){if(!c||!R||!R.length)return;
+tnodes(c).forEach(t=>{const L=t.n.nodeValue.length,segs=[];R.forEach((r,idx)=>{const s0=r.s!==undefined?r.s:r[0],e0=r.e!==undefined?r.e:r[1],a=Math.max(s0,t.s)-t.s,b=Math.min(e0,t.s+L)-t.s;if(b>a)segs.push([a,b,idx,t.s+b===e0])});
+segs.sort((x,y)=>y[0]-x[0]).forEach(([a,b,idx,last])=>{let m=t.n;if(b<m.nodeValue.length)m.splitText(b);if(a>0)m=m.splitText(a);const sp=document.createElement("span");sp.className=cls;if(wi){sp.dataset.i=idx;if(last)sp.dataset.end=1}m.parentNode.insertBefore(sp,m);sp.appendChild(m)})})}
+function applyHL(c,key){applyRanges(c,hl[key],"hl");applyRanges(c,notes[key],"note",true)}
+function refreshHL(c,key){unwrapHL(c);applyHL(c,key);saveSess()}
+/* ---------- GHI CHÚ ---------- */
+function cont(key){return $(key[0]==="p"?"#pass":"#qs")}
+function addNote(){if(done||!$("#pass"))return;const sel=getSelection();if(!sel.rangeCount||sel.isCollapsed){toast("Hãy bôi đen đoạn chữ rồi bấm Ghi chú",3500);return}
+const r=sel.getRangeAt(0),c=panel(r.commonAncestorContainer);if(!c||c!==panel(r.startContainer)||c!==panel(r.endContainer)){toast("Hãy bôi đen trong một khung (bài đọc hoặc câu hỏi)",3500);return}
+const s0=offOf(c,r.startContainer,r.startOffset),e0=offOf(c,r.endContainer,r.endOffset);if(e0<=s0)return;
+const key=(c.id==="pass"?"p":"q")+cur;if((notes[key]||[]).some(x=>s0<x.e&&e0>x.s)){toast("Vùng này đã có ghi chú. Bấm vào ghi chú cũ để sửa.",3500);return}
+sel.removeAllRanges();noteDlg(key,-1,s0,e0,"")}
+function noteDlg(key,i,s0,e0,t){modal(`<h3 style="margin:0 0 8px">📝 Ghi chú</h3><textarea id="nt" maxlength="500" style="width:100%" placeholder="Nhập ghi chú..." ${done?"readonly":""}>${esc(t)}</textarea><div class="row" style="margin-top:12px">${i>=0&&!done?`<button onclick="delNote('${key}',${i})">Xóa ghi chú</button>`:"<span></span>"}<span><button onclick="closeM()">Đóng</button> ${done?"":`<button class="pri" onclick="saveNote('${key}',${i},${s0},${e0})">Lưu</button>`}</span></div>`);setTimeout(()=>{const x=$("#nt");x&&x.focus()},50)}
+function saveNote(key,i,s0,e0){const t=$("#nt").value.trim();closeM();const L=notes[key]=notes[key]||[];if(!t){if(i>=0)L.splice(i,1)}else if(i>=0)L[i].t=t;else L.push({s:s0,e:e0,t});refreshHL(cont(key),key)}
+function delNote(key,i){closeM();notes[key].splice(i,1);refreshHL(cont(key),key)}
+function addHL(c,key,s,e){if(e<=s)return;const R=(hl[key]||[]).concat([[s,e]]).sort((x,y)=>x[0]-y[0]),M=[];
+R.forEach(r=>{const l=M[M.length-1];if(l&&r[0]<=l[1])l[1]=Math.max(l[1],r[1]);else M.push(r.slice())});hl[key]=M;refreshHL(c,key)}
+function panel(n){const el=n&&(n.nodeType===1?n:n.parentElement);return el&&el.closest?el.closest("#pass,#qs"):null}
+let justHL=false;
+let md={x:0,y:0},lastRm=0;
+document.addEventListener("mousedown",e=>{md={x:e.clientX,y:e.clientY}},true);
+document.addEventListener("mouseup",e=>{if(!$("#pass"))return;const sel=getSelection(),t=e.target,pc=t&&t.closest?panel(t):null,click=Math.hypot(e.clientX-md.x,e.clientY-md.y)<4&&e.detail===1;
+if(click&&pc){const nn=t.closest(".note"),key=(pc.id==="pass"?"p":"q")+cur,N=nn&&(notes[key]||[])[+nn.dataset.i];if(N){noteDlg(key,+nn.dataset.i,N.s,N.e,N.t);return}}
+if(!hlOn||done)return;
+if(click&&pc&&t.closest(".hl")){const key=(pc.id==="pass"?"p":"q")+cur,o=offOf(pc,t.closest(".hl"),0);hl[key]=(hl[key]||[]).filter(([s,en])=>!(o>=s&&o<en));refreshHL(pc,key);sel.removeAllRanges();lastRm=Date.now();return}
+if(e.detail>=2&&Date.now()-lastRm<600){sel.removeAllRanges();return}
+if(sel.isCollapsed||!sel.rangeCount)return;
+const r=sel.getRangeAt(0),c=panel(r.commonAncestorContainer);if(!c||c!==panel(r.startContainer)||c!==panel(r.endContainer))return;
+addHL(c,(c.id==="pass"?"p":"q")+cur,offOf(c,r.startContainer,r.startOffset),offOf(c,r.endContainer,r.endOffset));justHL=true;setTimeout(()=>justHL=false,50);sel.removeAllRanges()});
+document.addEventListener("click",e=>{if(justHL&&e.target.closest&&e.target.closest("#qs label")){e.preventDefault()}},true);
+/* ---------- DONE ---------- */
+function submit(auto){if(!auto&&!done&&!confirm("Bạn chắc chắn muốn nộp bài?"))return;
+done=true;clearInterval(tick);saveSess();sync();finished()}
+function finished(){closeM();const n=Object.keys(ans).length;
+$("#app").innerHTML=`<header><span class="logo">IELTS Reading</span></header><div class="wrap" style="text-align:center;padding-top:60px"><div style="font-size:56px">✅</div><h1>Bạn đã hoàn thành bài thi</h1><p class="muted">${esc(T.title||"")}<br>Đã trả lời ${n} / ${T.total} câu</p><div style="display:flex;gap:10px;justify-content:center;margin-top:20px"><button onclick="review()">Xem lại bài</button><button class="pri" onclick="home()">Về trang chủ</button></div></div>`}
+function review(){$("#app").innerHTML=shell(true);initGut();go(cur)}
+async function loadTests(){try{
+const idx=await (await fetch("tests/index.json?"+Date.now())).json(),srv=[];
+for(const f of idx){try{const t=valid(await (await fetch("tests/"+encodeURIComponent(f)+"?"+Date.now())).json());t._srv=true;srv.push(t)}catch(e){}}
+lib=[...srv,...lib.filter(t=>!t._srv)]}catch(e){}finally{ready=true;if(atHome){const S=getSess();if(!(S&&!S.done&&resume()))home()}}}
+home();loadTests();
+</script></body></html>
