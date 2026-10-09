@@ -1,0 +1,94 @@
+{
+ "title": "Mẫu Listening (âm thanh bíp để thử)",
+ "type": "listening",
+ "modes": [
+  "practice",
+  "exam"
+ ],
+ "readSeconds": 5,
+ "reviewSeconds": 10,
+ "sections": [
+  {
+   "title": "Section 1",
+   "audio": "audio/sample-s1.wav",
+   "transcript": "(bíp) Nội dung transcript của Section 1.",
+   "groups": [
+    {
+     "type": "fill",
+     "instruction": "Complete the notes. Write ONE WORD ONLY.",
+     "items": [
+      {
+       "q": "Customer name: Mr ______"
+      },
+      {
+       "q": "Phone number: 0412 ______"
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "instruction": "Choose the correct letter.",
+     "items": [
+      {
+       "q": "The caller wants to book",
+       "o": [
+        "a room",
+        "a table",
+        "a ticket"
+       ]
+      },
+      {
+       "q": "The event starts on",
+       "o": [
+        "Monday",
+        "Friday",
+        "Sunday"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Section 2",
+   "audio": "audio/sample-s2.wav",
+   "transcript": "(bíp) Nội dung transcript của Section 2.",
+   "groups": [
+    {
+     "type": "fill",
+     "instruction": "Complete the sentences. Write ONE WORD ONLY.",
+     "items": [
+      {
+       "q": "The museum opens at ______ o'clock."
+      },
+      {
+       "q": "Visitors must leave their ______ at the desk."
+      }
+     ]
+    },
+    {
+     "type": "mcq",
+     "instruction": "Choose the correct letter.",
+     "items": [
+      {
+       "q": "Tickets for students cost",
+       "o": [
+        "5 dollars",
+        "8 dollars",
+        "12 dollars"
+       ]
+      },
+      {
+       "q": "The tour lasts",
+       "o": [
+        "20 minutes",
+        "an hour",
+        "two hours"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

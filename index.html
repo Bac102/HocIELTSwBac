@@ -63,7 +63,7 @@ const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&"
 function save(){try{localStorage.setItem("ielts_lib",JSON.stringify(lib.filter(t=>!t._srv)))}catch(e){}}
 function valid(t){if(!t||!Array.isArray(t.passages)||!t.passages.length)throw "Thiếu 'passages'";t.passages.forEach(p=>{if(!p.text||!Array.isArray(p.groups))throw "Passage thiếu text/groups"});return t}
 /* ---------- HOME ---------- */
-function home(){clearInterval(tick);clearInterval(beat);closeM();atHome=true;$("#app").innerHTML=`<header><span class="logo">IELTS Reading</span><span class="sp"></span><button onclick="theme()">🌓</button></header>
+function home(){clearInterval(tick);clearInterval(beat);closeM();atHome=true;$("#app").innerHTML=`<header><span class="logo">IELTS Reading</span><span class="sp"></span><a href="listening.html" style="text-decoration:none"><button>🎧 Listening</button></a><button onclick="theme()">🌓</button></header>
 <div class="wrap"><h2>Chọn đề thi</h2><div id="list"></div>
 ${ready&&canEdit?`<div class="card"><b>Nhập đề mới (dành cho giáo viên)</b><p class="muted">Dán JSON đề thi hoặc tải file .json. Đề nhập ở đây chỉ lưu trên máy này để bạn thử. Muốn học sinh thấy đề, hãy bỏ file JSON vào thư mục tests/ và thêm tên file vào tests/index.json (xem README).</p>
 <textarea id="imp" placeholder='{"title":"...","time":60,"passages":[{"title":"...","text":"đoạn 1\\n\\nđoạn 2","groups":[{"type":"tfng|mcq|fill","instruction":"...","items":[{"q":"...","a":"True","o":["A","B"]}]}]}]}'></textarea>
