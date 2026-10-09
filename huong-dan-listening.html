@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hướng dẫn thêm bài Listening</title>
+<style>body{font:16px/1.65 system-ui,sans-serif;max-width:780px;margin:0 auto;padding:20px;color:#1c1c28}h1{color:#d9261c}h2{margin-top:30px;border-bottom:1px solid #e5e7eb;padding-bottom:6px}pre{background:#f4f4f6;padding:12px;border-radius:8px;overflow:auto;font-size:13px}code{background:#f4f4f6;padding:1px 5px;border-radius:4px}.w{background:#fff4e5;border-left:4px solid #f59e0b;padding:10px 14px;border-radius:6px}@media(prefers-color-scheme:dark){body{background:#15161c;color:#e8e8ee}pre,code{background:#23252f}.w{background:#3a2d12}}</style></head><body>
+<h1>Hướng dẫn thêm bài Listening</h1><p><a href="listening.html">← Trang Listening</a> · <a href="teacher.html">Trang theo dõi</a></p>
+<h2>Bước 1. Chuẩn bị file âm thanh</h2>
+<p>Mỗi section một file <code>.mp3</code>, đặt tên không dấu, không khoảng trắng, ví dụ <code>t1-s1.mp3</code>, <code>t1-s2.mp3</code>.</p>
+<div class="w"><b>Giới hạn quan trọng:</b> tải file lên GitHub bằng trình duyệt chỉ nhận tối đa <b>25 MB mỗi file</b>. Nén mỗi section xuống khoảng 3 đến 8 MB là đủ rõ để nghe.</div>
+<p>Cách nén: dùng một trang nén mp3 trực tuyến (chọn chế độ mono, 64 kbps), hoặc nếu bạn có ffmpeg trên máy thì chạy:</p>
+<pre>ffmpeg -i goc.mp3 -ac 1 -b:a 64k t1-s1.mp3</pre>
+<p>Nên dùng âm thanh do bạn tự thu hoặc đã được cấp phép. Băng của sách Cambridge có bản quyền.</p>
+<h2>Bước 2. Tạo file đề <code>.json</code></h2>
+<p>Đặt tên không dấu, ví dụ <code>test1.json</code>. Copy mẫu dưới đây rồi sửa. File đề <b>không chứa đáp án</b> (bạn giữ đáp án riêng để chữa bài).</p>
+<pre>{
+ "title": "Listening Test 1",
+ "type": "listening",
+ "modes": ["practice", "exam"],
+ "readSeconds": 30,
+ "reviewSeconds": 120,
+ "sections": [
+  {
+   "title": "Section 1",
+   "audio": "audio/t1-s1.mp3",
+   "transcript": "Nội dung bài nghe (không bắt buộc)",
+   "groups": [
+    {
+     "type": "fill",
+     "instruction": "Complete the notes. Write ONE WORD ONLY.",
+     "items": [
+      { "q": "Customer name: Mr ______" },
+      { "q": "Phone number: 0412 ______" }
+     ]
+    },
+    {
+     "type": "mcq",
+     "instruction": "Choose the correct letter.",
+     "items": [
+      { "q": "The caller wants to book", "o": ["a room", "a table", "a ticket"] }
+     ]
+    }
+   ]
+  }
+ ]
+}</pre>
+<ul><li><code>type</code> của nhóm câu: <code>fill</code> (điền từ, chỗ trống viết bằng <code>______</code>) hoặc <code>mcq</code> (trắc nghiệm, các lựa chọn trong <code>o</code>).</li>
+<li>Số câu tự đánh từ 1 đến hết theo thứ tự các section, nên Section 2 bắt đầu sau câu cuối của Section 1.</li>
+<li><code>modes</code>: bỏ bớt <code>"practice"</code> hoặc <code>"exam"</code> nếu muốn đề chỉ có một chế độ.</li>
+<li><code>readSeconds</code>: giây đọc trước mỗi section ở chế độ thi thật. <code>reviewSeconds</code>: giây chép đáp án cuối bài.</li></ul>
+<h2>Bước 3. Đưa lên GitHub</h2>
+<ol><li>Vào kho GitHub, mở thư mục <code>audio</code>, bấm <b>Add file → Upload files</b>, kéo các file mp3 vào, bấm <b>Commit changes</b>.</li>
+<li>Mở thư mục <code>listening</code>, tải file <code>test1.json</code> lên tương tự.</li>
+<li>Vẫn trong <code>listening</code>, bấm vào <code>index.json</code>, bấm biểu tượng cây bút để sửa, thêm tên đề vào danh sách rồi Commit:
+<pre>["sample.json", "test1.json"]</pre></li>
+<li>Đợi khoảng 1 phút, mở trang Listening và nhấn <b>Ctrl + F5</b>.</li></ol>
+<h2>Bước 4. Kiểm tra trước khi giao</h2>
+<ul><li>Vào chế độ <b>Luyện tập</b> nghe thử từng section, kiểm tra âm thanh khớp đúng section.</li>
+<li>Vào <b>Thi thật</b> với một section ngắn để xem phần đọc trước và việc tự chuyển section.</li>
+<li>Mở trang theo dõi, xem bài thử của bạn có hiện ở dòng Listening không.</li></ul>
+<h2>Xóa đề</h2><p>Bỏ tên đề khỏi <code>listening/index.json</code>. Muốn xóa hẳn thì xóa thêm file <code>.json</code> và các file mp3 tương ứng.</p>
+</body></html>
